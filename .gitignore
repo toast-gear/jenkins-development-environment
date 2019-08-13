@@ -4,3 +4,4 @@
 
 # Development Ignores
 scratch/
+*.log
