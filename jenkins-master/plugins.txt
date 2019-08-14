@@ -1,0 +1,12 @@
+credentials:latest
+credentials-binding:latest
+ssh-agent:latest
+ssh-credentials:latest
+ssh-slaves:latest
+git:latest
+workflow-aggregator:latest
+pipeline-utility-steps:latest
+groovy:latest
+job-dsl:latest
+script-security:latest
+mailer:latest

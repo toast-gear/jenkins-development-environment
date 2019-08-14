@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  jenkins-master:
+    build: ./jenkins-master/
+    environment:
+      JAVA_OPTS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+    ports:
+      - "8080:8080"
+  jenkins-node-linux:
+      build: ./jenkins-node-linux/
+      restart: always
+      env_file:
+        - ./jenkins-node-linux/keys.env
+      volumes:
+        - jenkins-node-workspace:/var/jenkins_home
+  dind:
+    image: "docker:18.09.8-dind"
+    expose:
+      - "2375"
+      - "2376"
+    privileged: true
+    restart: always
+    environment: 
+      - DOCKER_DRIVER=overlay2
+    volumes:
+      - jenkins-node-workspace:/var/jenkins_home
+      - dind-cache:/var/lib/docker
+
+volumes:
+  jenkins-node-workspace:
+  dind-cache:
