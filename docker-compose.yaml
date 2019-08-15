@@ -9,12 +9,16 @@ services:
   jenkins-node-linux:
       build: ./jenkins-node-linux/
       restart: always
-      env_file:
-        - ./jenkins-node-linux/keys.env
+      environment: 
+        - JENKINS_SLAVE_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCJlrRQKKMRRws9kWDNTfzeTEMGB8FPrIzREgZevHKzrFZxuO1C5tc+Zwl4UlONxTV3vq7VTVBIYOdd0ttqSLkBfjDWqBFFnm9DIIdevVkfhCNRRLa4CuHLB6tCNZJYrbk0aw8g/AYJP2rEHp4rT0Wv/CiOSkiYKBCpPhWMvPytqhZw2YzZPvVKh5mGrNo7X+STc6qHvFDQJ+sPwTAinaZuOPIwrl6x0LriacqvG76BQ7oN3cApRv0FfqqmaxUg3+1fm2c40vrg4E/sWk3KyYNViaOwUST/v8MkMUzVgE6aDHqXwdDIkwdTSXpd979VqKNTBCUOZoEh77c7/HUJFbz
+        - DOCKER_HOST=tcp://docker:2376
+        - DOCKER_CERT_PATH=/mnt/certs/client
+        - DOCKER_TLS_VERIFY=1
       volumes:
         - jenkins-node-workspace:/var/jenkins_home
-  dind:
-    image: "docker:18.09.8-dind"
+        - docker-certs-client:/mnt/certs/client
+  docker:
+    image: "docker:19.03.1-dind"
     expose:
       - "2375"
       - "2376"
@@ -22,10 +26,13 @@ services:
     restart: always
     environment: 
       - DOCKER_DRIVER=overlay2
+      - DOCKER_TLS_CERTDIR=/mnt/certs
     volumes:
       - jenkins-node-workspace:/var/jenkins_home
-      - dind-cache:/var/lib/docker
+      - docker-cache:/var/lib/docker
+      - docker-certs-client:/mnt/certs/client
 
 volumes:
   jenkins-node-workspace:
-  dind-cache:
+  docker-cache:
+  docker-certs-client:
