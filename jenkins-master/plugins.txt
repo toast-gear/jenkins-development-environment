@@ -10,3 +10,6 @@ groovy:latest
 job-dsl:latest
 script-security:latest
 mailer:latest
+cloudbees-folder:latest
+timestamper:latest
+rebuild:latest
