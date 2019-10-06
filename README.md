@@ -4,7 +4,7 @@
 Basically got tired of joining companies and testing Jenkins being hard. So I am now rolling my own environment from company to company
 
 ### Credentials
-The docker-compose.yaml is set to run without credentials, this is set via the `JAVA_OPTS` parameter `Djenkins.install.runSetupWizard=false`. If this is removed or set to `true` you will need to be aware of the below:
+The docker-compose.yaml is set to run without credentials, this is set via the `JAVA_OPTS` parameter `-Djenkins.install.runSetupWizard=false`. If this is removed or set to `true` you will need to be aware of the below:
 
 _By default the admin password is held in file on the master, on first run of the setup wizard the password should get printed into terminal. On subsequent runs you can find it again by cat'ing the contents of below file (assuming you haven't changed it)_<br /><br />
 **Username :** admin<br />

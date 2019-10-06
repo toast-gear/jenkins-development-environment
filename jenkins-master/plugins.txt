@@ -17,3 +17,5 @@ pipeline-utility-steps:latest
 build-blocker-plugin:latest
 metrics:latest
 cloudbees-folder:latest
+timestamper:latest
+rebuild:latest
