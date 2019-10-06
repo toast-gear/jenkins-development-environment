@@ -1,0 +1,7 @@
+# OS Junk
+[Tt]umbs.db
+.DS_STORE
+
+# Development Ignores
+scratch/
+*.log
